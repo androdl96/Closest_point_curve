@@ -54,6 +54,13 @@ int find_closest_point(double points[][2], int size, double target_point[2]) {
     return closest_index;
 }
 
+void linspace(int start, int end, int num, int* result) {
+    double step = (double)(end - start) / (num - 1);
+    for (int i = 0; i < num; i++) {
+        result[i] = start + (int)(i * step);
+    }
+}
+
 int main() {
     clock_t start, end;
     double cpu_time_used;
@@ -90,9 +97,49 @@ int main() {
     int closest_index = find_closest_point(line, MAX_LINES, new_point);
     end = clock();
     cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
-    
+
     printf("El punto más cercano a new_point es: (%f, %f)\n", line[closest_index][0], line[closest_index][1]);
     printf("Tiempo de ejecución: %f segundos\n", cpu_time_used);
+    
+    start = clock();
+    int num_points = 20;
+    int* coarse_search_indexes = (int*) malloc(num_points * sizeof(int));
+    //double (*coarse_search_points)[2] = malloc(num_points * sizeof(*coarse_search_points));
+    double coarse_search_points[num_points][2];
+
+    linspace(0, MAX_LINES - 1, num_points, coarse_search_indexes);
+
+    /*for (int i = 0; i < num_points; i++) {
+        printf("%d ", coarse_search_indexes[i]);
+    }
+    printf("\n");*/
+
+    for (int i = 0; i < num_points; i++) {
+        coarse_search_points[i][0] = line[coarse_search_indexes[i]][0];
+        coarse_search_points[i][1] = line[coarse_search_indexes[i]][1];
+    }
+
+    /*for (int i = 0; i < num_points; i++) {
+            printf("%f, %f\n", coarse_search_points[i][0],coarse_search_points[i][1]);
+    }*/
+    int closest_index_coarse = find_closest_point(coarse_search_points, num_points, new_point);
+
+    int start_index, end_index;
+    if (closest_index_coarse > 0) start_index = coarse_search_indexes[closest_index_coarse - 1]; else start_index = coarse_search_indexes[0];
+    if (closest_index_coarse < num_points - 1) end_index = coarse_search_indexes[closest_index_coarse + 1]; else end_index = coarse_search_indexes[num_points - 1];
+
+    double line_segment[end_index-start_index][2];
+    for (int i = 0; i <= end_index-start_index; i++) {
+        line_segment[i][0]=line[start_index+i][0];
+        line_segment[i][1]=line[start_index+i][1];
+    }
+    int closest_index2= find_closest_point(line_segment, end_index-start_index, new_point);
+    end = clock();
+    cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
+    printf("Tiempo de ejecución (II): %f segundos\n", cpu_time_used);
+
+    printf("El punto más cercano a new_point es (II): (%f, %f)\n", line_segment[closest_index2][0], line_segment[closest_index2][1]);
+
     printf("Debug | Exit\n");
     return 0;
 }
