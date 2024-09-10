@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <omp.h>
-
+#include <math.h>
+#include <time.h>
 
 #define MAX_LINES 10000  // Ajusta esto según la cantidad de líneas que esperas en el archivo
 
@@ -52,12 +53,10 @@ int find_closest_point(double points[][2], int size, double target_point[2]) {
 
     return closest_index;
 }
-/*typedef struct {
-    double x;
-    double y;
-} Point;*/
 
 int main() {
+    clock_t start, end;
+    double cpu_time_used;
     
     FILE *file = fopen("line_data.txt", "r");
     if (file == NULL) {
@@ -79,7 +78,7 @@ int main() {
         printf("Point %d: x = %.10f, y = %.10f\n", j, line[j][0], line[j][1]);
     }*/
 
-    double new_point[2] = {1.6501500150015005, 9.288415653690745};
+    double new_point[2] = {-0.8797029702970297, 29.819387891489004};
     
     // Normalización
     double min_x, max_x, min_y, max_y;
@@ -87,9 +86,13 @@ int main() {
     normalize(line, MAX_LINES, min_x, max_x, min_y, max_y);
     normalize_point(new_point, min_x, max_x, min_y, max_y);
 
+    start = clock();
     int closest_index = find_closest_point(line, MAX_LINES, new_point);
+    end = clock();
+    cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
+    
     printf("El punto más cercano a new_point es: (%f, %f)\n", line[closest_index][0], line[closest_index][1]);
-
+    printf("Tiempo de ejecución: %f segundos\n", cpu_time_used);
     printf("Debug | Exit\n");
     return 0;
 }
