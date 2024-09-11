@@ -6,6 +6,7 @@
 
 #define MAX_LINES 10000  // Ajusta esto según la cantidad de líneas que esperas en el archivo
 
+
 void find_min_max(double points[][2], int size, double *min_x, double *max_x, double *min_y, double *max_y) {
     *min_x = points[0][0];
     *max_x = points[MAX_LINES-1][0];
