@@ -40,6 +40,7 @@
 *.x86_64
 *.hex
 test
+test_realL
 
 # Debug files
 *.dSYM/
