@@ -5,7 +5,8 @@
 #include <time.h>
 
 //#define MAX_LINES 908 // Line 360 // Hacer esto no manual, maybe con wc
-#define MAX_LINES 976 // Line extended
+//#define MAX_LINES 976 // Line extended
+#define MAX_LINES 41662
 #define EARTH_RADIUS_KM 6371.0
 #define PI 3.14159
 
@@ -55,7 +56,8 @@ int main() {
     double cpu_time_used;
 
     //FILE *file = fopen("Closest_point_curve/line_BEL_360.txt", "r");
-    FILE *file = fopen("Closest_point_curve/line_BEL_extended.txt", "r");
+    //FILE *file = fopen("Closest_point_curve/line_BEL_extended.txt", "r");
+    FILE *file = fopen("Closest_point_curve/aus_long_line.txt", "r");
     if (file == NULL) {
         perror("Debug | Error al abrir el archivo");
         return 1;
@@ -72,7 +74,8 @@ int main() {
     fclose(file);
 
     //double new_point[2] = {51.1008044, 3.433197};
-    double new_point[2] = {51.0995753, 3.41047315};
+    //double new_point[2] = {51.0995753, 3.41047315};
+    double new_point[2] = {-32.861394059999995, 143.58986542}; //aus line
 
     start = clock();
     int closest_index = find_closest_point(line, MAX_LINES, new_point);
@@ -83,7 +86,7 @@ int main() {
     printf("Tiempo de ejecución: %f segundos\n", cpu_time_used);
 
     start = clock();
-    int num_points = 50;
+    int num_points = 500;
     int* coarse_search_indexes = (int*) malloc(num_points * sizeof(int));
     //double (*coarse_search_points)[2] = malloc(num_points * sizeof(*coarse_search_points));
     double coarse_search_points[num_points][2];
