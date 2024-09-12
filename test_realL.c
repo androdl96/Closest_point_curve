@@ -55,7 +55,7 @@ int main() {
     double cpu_time_used;
 
     //FILE *file = fopen("Closest_point_curve/line_BEL_360.txt", "r");
-    FILE *file = fopen("/home/andyrodlor/Documents/location_processing/Closest_point_curve/line_BEL_360.txt", "r");
+    FILE *file = fopen("Closest_point_curve/line_BEL_extended.txt", "r");
     if (file == NULL) {
         perror("Debug | Error al abrir el archivo");
         return 1;
@@ -71,7 +71,8 @@ int main() {
     }
     fclose(file);
 
-    double new_point[2] = {51.1008044, 3.433197};
+    //double new_point[2] = {51.1008044, 3.433197};
+    double new_point[2] = {51.0995753, 3.41047315};
 
     start = clock();
     int closest_index = find_closest_point(line, MAX_LINES, new_point);
