@@ -4,7 +4,8 @@
 #include <math.h>
 #include <time.h>
 
-#define MAX_LINES 908 // Hacer esto no manual, maybe con wc
+//#define MAX_LINES 908 // Line 360 // Hacer esto no manual, maybe con wc
+#define MAX_LINES 976 // Line extended
 #define EARTH_RADIUS_KM 6371.0
 #define PI 3.14159
 
@@ -53,7 +54,8 @@ int main() {
     clock_t start, end;
     double cpu_time_used;
 
-    FILE *file = fopen("Closest_point_curve/line_BEL_360.txt", "r");
+    //FILE *file = fopen("Closest_point_curve/line_BEL_360.txt", "r");
+    FILE *file = fopen("/home/andyrodlor/Documents/location_processing/Closest_point_curve/line_BEL_360.txt", "r");
     if (file == NULL) {
         perror("Debug | Error al abrir el archivo");
         return 1;
