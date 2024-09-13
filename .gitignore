@@ -57,6 +57,10 @@ Module.symvers
 Mkfile.old
 dkms.conf
 
+
+### Leon-Guardo info ###
+Leon_Guardo*
+
 ### JupyterNotebooks ###
 # gitignore template for Jupyter Notebooks
 # website: http://jupyter.org/

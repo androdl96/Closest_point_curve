@@ -4,9 +4,10 @@
 #include <math.h>
 #include <time.h>
 
-//#define MAX_LINES 908 // Line 360 // Hacer esto no manual, maybe con wc
-//#define MAX_LINES 976 // Line extended
-#define MAX_LINES 41662
+//#define MAX_LINES 908    // Line 360 // Hacer esto no manual, maybe con wc
+//#define MAX_LINES 976    // Line extended
+//#define MAX_LINES 41662  //AUS line
+#define MAX_LINES 2058    //LG line
 #define EARTH_RADIUS_KM 6371.0
 #define PI 3.14159
 
@@ -57,7 +58,8 @@ int main() {
 
     //FILE *file = fopen("Closest_point_curve/line_BEL_360.txt", "r");
     //FILE *file = fopen("Closest_point_curve/line_BEL_extended.txt", "r");
-    FILE *file = fopen("Closest_point_curve/aus_long_line.txt", "r");
+    //FILE *file = fopen("Closest_point_curve/aus_long_line.txt", "r");
+    FILE *file = fopen("Closest_point_curve/Leon_Guardo_line.txt", "r");
     if (file == NULL) {
         perror("Debug | Error al abrir el archivo");
         return 1;
@@ -75,7 +77,8 @@ int main() {
 
     //double new_point[2] = {51.1008044, 3.433197};
     //double new_point[2] = {51.0995753, 3.41047315};
-    double new_point[2] = {-32.861394059999995, 143.58986542}; //aus line
+    //double new_point[2] = {-32.861394059999995, 143.58986542}; //aus line
+    double new_point[2] = {42.767382096999995, -5.1170012840000005}; //LG line
 
     start = clock();
     int closest_index = find_closest_point(line, MAX_LINES, new_point);
@@ -85,14 +88,14 @@ int main() {
     printf("El punto más cercano a new_point es: (%f, %f)\n", line[closest_index][0], line[closest_index][1]);
     printf("Tiempo de ejecución: %f segundos\n", cpu_time_used);
 
-    start = clock();
-    int num_points = 500;
+    
+    int num_points = 21;
     int* coarse_search_indexes = (int*) malloc(num_points * sizeof(int));
     //double (*coarse_search_points)[2] = malloc(num_points * sizeof(*coarse_search_points));
     double coarse_search_points[num_points][2];
-
     linspace(0, MAX_LINES - 1, num_points, coarse_search_indexes);
 
+    start = clock();
     for (int i = 0; i < num_points; i++) {
         coarse_search_points[i][0] = line[coarse_search_indexes[i]][0];
         coarse_search_points[i][1] = line[coarse_search_indexes[i]][1];
