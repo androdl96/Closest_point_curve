@@ -78,7 +78,8 @@ int main() {
     //double new_point[2] = {51.1008044, 3.433197};
     //double new_point[2] = {51.0995753, 3.41047315};
     //double new_point[2] = {-32.861394059999995, 143.58986542}; //aus line
-    double new_point[2] = {42.767382096999995, -5.1170012840000005}; //LG line
+    //double new_point[2] = {42.767382096999995, -5.1170012840000005}; //LG line
+    double new_point[2] = {42.799958803, -4.8301938159999995}; //LG2 line
 
     start = clock();
     int closest_index = find_closest_point(line, MAX_LINES, new_point);
@@ -104,7 +105,7 @@ int main() {
 
     int start_index, end_index;
     if (closest_index_coarse > 0) start_index = coarse_search_indexes[closest_index_coarse - 1]; else start_index = coarse_search_indexes[0];
-    if (closest_index_coarse < num_points - 1) end_index = coarse_search_indexes[closest_index_coarse + 1]; else end_index = coarse_search_indexes[num_points - 1];
+    if (closest_index_coarse < num_points - 1) end_index = coarse_search_indexes[closest_index_coarse + 1]; else end_index = coarse_search_indexes[num_points - 1]+1;
 
     double line_segment[end_index-start_index][2];
     for (int i = 0; i <= end_index-start_index; i++) {
