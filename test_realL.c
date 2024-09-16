@@ -78,8 +78,9 @@ int main() {
     //double new_point[2] = {51.1008044, 3.433197};
     //double new_point[2] = {51.0995753, 3.41047315};
     //double new_point[2] = {-32.861394059999995, 143.58986542}; //aus line
-    //double new_point[2] = {42.767382096999995, -5.1170012840000005}; //LG line
-    double new_point[2] = {42.799958803, -4.8301938159999995}; //LG2 line
+    double new_point[2] = {42.767382096999995, -5.1170012840000005}; //LG line
+    //double new_point[2] = {42.799958803, -4.8301938159999995}; //LG2 line
+    //double new_point[2] = {42.667964001,-5.538886872}; //LG3 line
 
     start = clock();
     int closest_index = find_closest_point(line, MAX_LINES, new_point);
