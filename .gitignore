@@ -41,6 +41,7 @@
 *.hex
 test
 test_realL
+location_processing.code-workspace
 
 # Debug files
 *.dSYM/
